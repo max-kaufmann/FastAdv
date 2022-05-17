@@ -88,7 +88,7 @@ def get_args():
     parser.add_argument('--clever_batches',default=20,type=int)
     parser.add_argument('--clever_samples',default=50,type=int)
     parser.add_argument('--clever_num_images',default=40,type=int)
-    parser.add_argument('--normal_accuracy', default=False, action=argparse.BooleanOptionalAction)
+    parser.add_argument('--normal_accuracy', default=True, action=argparse.BooleanOptionalAction)
     parser.add_argument('--clever_perturb',default = 5./255,type = float)
 
     return parser.parse_args()
