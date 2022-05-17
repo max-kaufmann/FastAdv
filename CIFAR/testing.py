@@ -36,10 +36,6 @@ def get_accuracy(model,dataloader_iterator,args):
 
         predictions = model(xs)
         total_correct += (t.argmax(predictions,dim=1) == ys).sum()
-        if total_correct != len(ys):
-            import pdb
-            pdb.set_trace()
-        pdb.set_trace()
         dataloader_length += len(ys)
 
 
