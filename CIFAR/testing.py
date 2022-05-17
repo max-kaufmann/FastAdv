@@ -84,7 +84,7 @@ def get_args():
     parser.add_argument('--model',type=str,default="resnet")
     parser.add_argument('--dir',default="./",type=str)
     parser.add_argument('--log',type=str, default="log.txt")
-    parser.add_argument('--test',default="pgd",choices=["pgd","autoattack","clever"])
+    parser.add_argument('--test',default="pgd",choices=["pgd","autoattack","clever","standard"])
     parser.add_argument('--clever_batches',default=20,type=int)
     parser.add_argument('--clever_samples',default=50,type=int)
     parser.add_argument('--clever_num_images',default=40,type=int)
@@ -163,8 +163,10 @@ def main():
         mins = np.min(vals, axis=1)
         print(mins)
         clever_score = np.sum(mins) / len(mins)
+    elif args.test == "standard":
+        adv_test_acc = 0.
 
-    if args.test == "autoattack" or args.test == "pgd":
+    if args.test == "autoattack" or args.test == "pgd" or args.test == "standard":
         with open(args.dir + args.log, mode="a+") as f:
             f.seek(0)
             if f.readlines() == []:
