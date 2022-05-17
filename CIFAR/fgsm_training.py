@@ -115,7 +115,7 @@ def train(model,train_loader,args,saved_model=None):
             dataset.remove(indices[indices_as[upper:]])
             train_loader = t.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
-        if epoch + 1 == args.sampling_epoch and args.data_proportion != 1 and args.sampling_method == "loss":
+        if epoch + 1 == args.sampling_epoch and args.data_proportion != 1 and args.sampling_method == "low":
             indices,loss_values=get_losses(model,train_loader,args)
             indices = np.concatenate(indices)
             loss_values = np.concatenate(loss_values)
