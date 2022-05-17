@@ -48,7 +48,7 @@ def get_args():
     parser.add_argument('--early_stopping_threshold', default=0.2, type=float)
     parser.add_argument('--evaluate',default=False,action=argparse.BooleanOptionalAction)
     parser.add_argument('--sampling_epoch',default=5,type=int)
-    parser.add_argument('--sampling_method',default='drop_extremes',choices=["drop_extremes","random","pgd-distance","loss"])
+    parser.add_argument('--sampling_method',default='drop_extremes',choices=["drop_extremes","random","pgd-distance","low"])
     parser.add_argument('--time_log',default="time_log.txt")
     parser.add_argument('--debug',action=argparse.BooleanOptionalAction,default=False)
     parser.add_argument('--systematic_sampling', action=argparse.BooleanOptionalAction, default=True)
