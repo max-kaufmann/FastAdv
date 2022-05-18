@@ -18,7 +18,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--batch_size', default=100, type=int)
     parser.add_argument('--training', default='fgsm', choices=['normal', 'pgd', 'fgsm','fgsm_active'])
-    parser.add_argument('--epochs', default=10, type=int)
+    parser.add_argument('--epochs', default=15, type=int)
     parser.add_argument('--epsilon_training', default=0.3, type=float)
     parser.add_argument('--epsilon_test', default=0.3, type=float)
     parser.add_argument('--pgd_steps', default=40, type=int)

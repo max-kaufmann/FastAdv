@@ -15,7 +15,7 @@ transform_train =  transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 ])
-transform_test = ([#transforms.Resize(28),
+transform_test = transforms.Compose([#transforms.Resize(28),
         transforms.Grayscale(3),
         transforms.ToTensor(),
         transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
