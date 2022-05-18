@@ -90,7 +90,7 @@ def get_mnist_train_dataloader(args):
     transform = transforms.ToTensor()
 
     data_proportion = 1.
-    training_dataset = IndexDataset(torchvision.datasets.FashionMNIST("../data/Fashion_MNIST_test", train=True, download=True, transform=transform))
+    training_dataset = IndexDataset(torchvision.datasets.FashionMNIST("../data/Fashion_MNIST_test", train=True, download=True, transform=transform_train))
 
     training_dataloader = t.utils.data.DataLoader(training_dataset, batch_size=args.batch_size, shuffle=True,
                                                   num_workers=4, pin_memory=True)
@@ -99,7 +99,7 @@ def get_mnist_train_dataloader(args):
 
 def get_mnist_test_dataloader(args):
 
-    test_dataset = IndexDataset(torchvision.datasets.FashionMNIST("../data/Fashion_MNIST_test", train=False, download=True, transform=transform))
+    test_dataset = IndexDataset(torchvision.datasets.FashionMNIST("../data/Fashion_MNIST_test", train=False, download=True, transform=transform_test))
     test_dataloader = t.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=4)
 
     return test_dataloader
