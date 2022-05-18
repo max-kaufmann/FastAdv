@@ -4,11 +4,23 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as transforms
 import numpy as np
-from torchvision import datasets, transforms
+from torchvision import datasets, transforms,models
 import config
 import math
 
-transform = transforms.Compose([transforms.ToTensor()])
+transform_train =  transforms.Compose([
+        #transforms.Resize(28),
+        transforms.RandomHorizontalFlip(),
+        transforms.Grayscale(3),
+        transforms.ToTensor(),
+        transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+])
+transform_test = ([#transforms.Resize(28),
+        transforms.Grayscale(3),
+        transforms.ToTensor(),
+        transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+    ])
+
 
 #TODO: Rewrite this as a normal thing
 class IndexDataset(t.utils.data.Dataset):
@@ -64,17 +76,15 @@ def get_test_model(args):
 
 
 def get_mnist_architecture(args):
+    model = models.resnet18(pretrained=True)
+    # for param in model.parameters():
+    #    param.requires_grad = False
 
-    return nn.Sequential(
-        nn.Conv2d(1, 16, 4, stride=2, padding=1),
-        nn.ReLU(),
-        nn.Conv2d(16, 32, 4, stride=2, padding=1),
-        nn.ReLU(),
-        nn.Flatten(),
-        nn.Linear(32*7*7,100),
-        nn.ReLU(),
-        nn.Linear(100, 10)
-    )
+    # Parameters of newly constructed modules have requires_grad=True by default
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, 10)
+    model = nn.Sequential(transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5]), model)
+    return model
 
 def get_mnist_train_dataloader(args):
     transform = transforms.ToTensor()
