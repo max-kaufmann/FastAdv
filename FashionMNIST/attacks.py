@@ -103,7 +103,7 @@ class Auto_attack():
     def __init__(self,model,args):
         self.model = nn.Sequential(transforms.Normalize(config.mn,config.std),model)
         self.args = args
-        self.adversary = autoattack.AutoAttack(model, norm='Linf', eps=args.epsilon,version='standard')
+        self.adversary = autoattack.AutoAttack(model, norm='Linf', eps=args.epsilon_training,version='standard')
         self.adversary.attacks_to_run= ['apgd-ce']
 
     def generate_attack(self,data):
