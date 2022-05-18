@@ -145,7 +145,7 @@ def train(model,train_loader,args,saved_model=None):
         if args.early_stopping and (epoch > 3 or args.epochs <= 3):
             model.eval()
 
-            xs_test,ys_test = attack.generate_attack((X,y))
+            xs_test,ys_test = attack.generate_attack((X,y,None))
 
             test_correct = (t.argmax(model(xs_test),dim=1) == ys_test).sum().item()
             test_accuracy = float(test_correct)/len(ys_test)
