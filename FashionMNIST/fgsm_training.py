@@ -115,6 +115,17 @@ def train(model,train_loader,args,saved_model=None):
             dataset.remove(indices[indices_as[upper:]])
             train_loader = t.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
+        if epoch + 1 == args.sampling_epoch and args.data_proportion != 1 and args.sampling_method == "high":
+            indices,loss_values=get_losses(model,train_loader,args)
+            indices = np.concatenate(indices)
+            loss_values = np.concatenate(loss_values)
+            mean_loss_vals = np.mean(loss_values)
+            indices_as = np.argsort(loss_values - mean_loss_vals)
+            dataset = train_loader.dataset
+            upper = int((args.data_proportion*len(dataset)))
+            dataset.remove(indices[indices_as[upper:]])
+            train_loader = t.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=True, num_workers=4)
+
 
 
         elif epoch + 1 == args.sampling_epoch and args.data_proportion != 1 and args.sampling_method == "random":

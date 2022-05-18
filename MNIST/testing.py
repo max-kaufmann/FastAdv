@@ -152,6 +152,18 @@ def main():
         mins=np.min(vals,axis=1)
         print(mins)
         clever_score=np.sum(mins)/len(mins)
+    elif args.test == "clever_theirs":
+        batch = next(iter(config.test_dataloader))[0]
+        if args.device == "gpu":
+            batch = batch.cuda()
+        from art.estimators.classification import PyTorchClassifier
+        m = PyTorchClassifier(model,F.cross_entropy,(28,28,3),10)
+        vals=compute_clever(m,args)
+        print(vals)
+        t.save(vals,args.dir[-5:] + "vals")
+        mins=np.min(vals,axis=1)
+        print(mins)
+        clever_score=np.sum(mins)/len(mins)
 
 
     if args.test == "autoattack" or args.test == "pgd":
