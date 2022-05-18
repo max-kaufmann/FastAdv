@@ -110,6 +110,8 @@ def set_args(args):
     if args.test == "clever":
         args.batch_size = args.clever_num_images
 
+    args.epsilon_training = args.epsilon
+
 
 
 def main():
