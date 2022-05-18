@@ -97,6 +97,7 @@ def get_args():
     return parser.parse_args()
 
 def set_args(args):
+    args.epsilon_training = args.epsilon
 
     if not (args.dir[-1] == '/'):
         args.dir += '/'
