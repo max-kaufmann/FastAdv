@@ -49,7 +49,7 @@ def train(model,train_loader,args,saved_model=None):
 
     #Here, we have our optimiser (thing doing the optimisation on the neural network)
     optimiser = t.optim.Adam(model.parameters(), lr = config.lr_max) #TODO: In paper they set it to lr.max at start, check if that matters
-    lr_generator = lambda t: np.interp(t, [0, args.epochs * 2 // 5, args.epochs], [0, config.lr_max, 0.2])
+    lr_generator = lambda t: np.interp(t, [0, args.epochs * 2 // 5, args.epochs], [0, config.lr_max, 0])
 
     epoch_size = len(train_loader)
     start_time = time.time()
