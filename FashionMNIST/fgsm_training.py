@@ -58,7 +58,7 @@ def train(model,train_loader,args,saved_model=None):
 
     if args.early_stopping:
         previous_accuracy = 0.
-        attack = attacks.pgd_attack(model, args.epsilon_test, args.alpha_test, config.early_stopping_steps, config.early_stopping_restarts, args)
+        attack = attacks.Auto_attack(model, args)
         best_model = None
 
     for epoch in range(0, args.epochs):
